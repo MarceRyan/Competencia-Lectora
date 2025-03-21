@@ -15,11 +15,11 @@ const PORT = process.env.PORT || 3000;
 
 // Ruta al archivo de credenciales
 // Escribir el archivo temporalmente
-const credentialsPath = path.resolve(__dirname, process.env.GOOGLE_APPLICATION_CREDENTIALS);
-const auth = new google.auth.GoogleAuth({
-  keyFile: credentialsPath,
-  scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-});
+const tempCredentialsPath = path.join(__dirname, "tmp-credentials.json");
+fs.writeFileSync(
+  tempCredentialsPath,
+  process.env.GOOGLE_APPLICATION_CREDENTIALS
+);
 
 // Leer las credenciales
 const credentials = JSON.parse(fs.readFileSync(tempCredentialsPath, "utf8"));
