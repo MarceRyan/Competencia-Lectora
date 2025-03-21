@@ -19,6 +19,7 @@ const tempCredentialsPath = path.join(__dirname, "tmp-credentials.json");
 
 if (!process.env.GOOGLE_APPLICATION_CREDENTIALS) {
   console.error("❌ ERROR: La variable de entorno GOOGLE_APPLICATION_CREDENTIALS no está definida.");
+  console.error(!process.env.GOOGLE_APPLICATION_CREDENTIALS);
   process.exit(1);
 }
 
