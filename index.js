@@ -19,13 +19,14 @@ const tempCredentialsPath = path.join(__dirname, "tmp-credentials.json");
 
 if (!process.env.GOOGLE_APPLICATION_CREDENTIALS) {
   console.error("❌ ERROR: La variable de entorno GOOGLE_APPLICATION_CREDENTIALS no está definida.");
-  process.exit(1); // o lanza un error si prefieres
+  process.exit(1);
 }
 
-fs.writeFileSync(
-  tempCredentialsPath,
-  process.env.GOOGLE_APPLICATION_CREDENTIALS
-);
+// Reemplaza los \\n por \n reales
+const credentialsContent = process.env.GOOGLE_APPLICATION_CREDENTIALS.replace(/\\n/g, '\n');
+
+// Ahora sí se escribe correctamente
+fs.writeFileSync(tempCredentialsPath, credentialsContent);
 // Leer las credenciales
 const credentials = JSON.parse(fs.readFileSync(tempCredentialsPath, "utf8"));
 
